@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научная статья</title>
+</head>
+<body style="background-color: cyan; margin-left: 10%">
+    <h1>Добавить статью</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="author">Автор:</label>
+        <input type="text" id="author" name="author" required>
+        <br>
+        <label for="year">Год:</label>
+        <input type="number" id="year" name="year" required>
+        <br>
+        <button type="submit">Сохранить</button>
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <h2>Записи</h2>
+    <ul>
+        {% for item in data_list %}
+            <li>{{ item.title }} - {{ item.author }} ({{ item.year }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
