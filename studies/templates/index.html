@@ -7,7 +7,7 @@
 </head>
 <body style="background-color: cyan; margin-left: 10%">
     <h1>Добавить статью</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="title">Название:</label>
         <input type="text" id="title" name="title" required>
@@ -21,6 +21,15 @@
         <button type="submit">Сохранить</button>
     </form>
 
+    <h2>Загрузить JSON файл</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file">Выберите файл:</label>
+        <input type="file" id="file" name="file" accept=".json" required>
+        <br>
+        <button type="submit">Загрузить</button>
+    </form>
+
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
@@ -31,5 +40,6 @@
             <li>{{ item.title }} - {{ item.author }} ({{ item.year }})</li>
         {% endfor %}
     </ul>
+
 </body>
 </html>
